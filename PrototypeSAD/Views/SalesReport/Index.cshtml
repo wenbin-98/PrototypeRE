@@ -56,11 +56,11 @@
                                     </i>
                                     View
                                 </a>
-                                <a class="btn btn-warning btn-sm" href="@Url.Action("Download")">
-                                    <i class="fas fa-file-download">
+                                <button class="btn btn-warning btn-sm" onclick="print('../Files/sales report.pdf')">
+                                    <i class="fas fa-print">
                                     </i>
-                                    Download
-                                </a>
+                                    Print
+                                </button>
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DeleteModal">
                                     <i class="fas fa-trash">
                                     </i>
@@ -188,6 +188,19 @@
                 window.open('/SalesReport/GetReport', "_blank");
             })
         })
+
+        function print(pdf) {
+            // Create an IFrame.
+            var iframe = document.createElement('iframe');
+            // Hide the IFrame.  
+            iframe.style.visibility = "hidden";
+            // Define the source.  
+            iframe.src = pdf;
+            // Add the IFrame to the web page.
+            document.body.appendChild(iframe);
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print(); // Print.
+        }
 
         var Toast = Swal.mixin({
             toast: true,
