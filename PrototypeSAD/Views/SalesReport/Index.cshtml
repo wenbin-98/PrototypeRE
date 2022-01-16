@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewData["Title"] = "Sales Report";
+}
+@section Styles{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/lib/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/lib/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6 offset-md-6">
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-new-sales">
+                            New Sales Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Month
+                            </th>
+                            <th>
+                                Year
+                            </th>
+                            <th>
+                                Income Amount
+                            </th>
+                            <th class="no-sort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Mac
+                            </td>
+                            <td>
+                                2021
+                            </td>
+                            <td>
+                                RM 360,000
+                            </td>
+                            <td class="text-right">
+                                <a class="btn btn-info btn-sm" href="#" id="view-btn">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    View
+                                </a>
+                                <a class="btn btn-warning btn-sm" href="@Url.Action("Download")">
+                                    <i class="fas fa-file-download">
+                                    </i>
+                                    Download
+                                </a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#DeleteModal">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-new-sales">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">New Sales Report</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label for="month" class="col-sm-2 col-form-label">Month : </label>
+                        <div class="col-sm-10">
+                            <select id="month" class="custom-select">
+                                <option selected>Choose month...</option>
+                                <option value="1" selected>January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="year" class="col-sm-2 col-form-label">Year : </label>
+                        <div class="col-sm-10">
+                            <select id="month" class="custom-select">
+                                <option selected>Choose year...</option>
+                                <option value="2021">2021</option>
+                                <option value="2022" selected>2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="SuccessAlert1();" data-dismiss="modal">Generate</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span>Are you sure you want to delete Sales Report Mac 2021?</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" id="ok-btn" class="btn btn-danger" onclick="SuccessAlert();" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <!-- DataTables  & Plugins -->
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/lib/jszip/jszip.min.js"></script>
+    <script src="~/lib/pdfmake/pdfmake.min.js"></script>
+    <script src="~/lib/pdfmake/vfs_fonts.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/lib/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        $(function () {
+            $("table").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "columnDefs": [
+                    {
+                        "targets": 3,
+                        "className": 'noVis'
+                    }
+                ],
+            }).buttons().container().appendTo('#DataTables_Table_0_wrapper .col-md-6:eq(0)');
+
+            $('#view-btn').click(function () {
+                window.open('/SalesReport/GetReport', "_blank");
+            })
+        })
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000
+        });
+
+        function SuccessAlert() {
+            Toast.fire({
+                icon: 'success',
+                title: 'Sales Report deleted successfully.'
+            })
+        }
+
+        function SuccessAlert1() {
+            Toast.fire({
+                icon: 'success',
+                title: 'Sales Report generated successfully.'
+            })
+        }
+    </script>
+}
